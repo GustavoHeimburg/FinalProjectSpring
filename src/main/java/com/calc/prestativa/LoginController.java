@@ -19,7 +19,7 @@ public class LoginController {
 
         if ("register".equals(action)) {
             if (userRepository.findByUsername(username) != null) {
-                model.addAttribute("mensagem", "Usuário já existe. Por favor, escolha outro nome de usuário.");
+                model.addAttribute("mensagem", "Nome de usuário já existe. Por favor, escolha outro nome.");
             } else {
                 newUser.setUsername(username);
                 newUser.setPassword(password);
