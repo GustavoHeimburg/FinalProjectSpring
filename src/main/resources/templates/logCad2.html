@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de login</title>
+    <link rel="stylesheet" href="/estilos/aboutStyle.css">
+</head>
+<body>
+<header class="cabecalho">
+    <nav class="cabecalho_menu">
+        <a class="cabecalho_link" href="/">Home</a>
+        <a class="cabecalho_link" href="/calcJava">Calculadora</a>
+    </nav>
+</header>
+<main class="apresentacao">
+    <section class="conteudo">
+        <section class="login">
+            <h1 class="titulo">Area de login</h1>
+            <div class="areaLogin">
+                <h2>login e Cadastro.</h2>
+                <br><br>
+                <form action="/processForm" method="post" id="userForm">
+                    <div th:if="${mensagem}" th:text="${mensagem}" class="mensagem"></div>
+                    <br>
+                    <div class="nomeUserContainer">
+                        <label>
+                            <img class="icon" src="image/user-regular-white.png" alt="Ícone do usuário"/>
+                            <input class="nomeUser" type="text" id="username" name="username" placeholder="E-mail/Nome"
+                                   required/>
+                        </label>
+                    </div>
+                    <div class="nomeUserContainer">
+                        <label>
+                            <img class="icon" src="image/lock-alt-regular-white.png" alt="Ícone do cadeado"/>
+                            <input class="senhaUser" type="password" id="password" name="password" placeholder="Senha"
+                                   required>
+                        </label>
+                    </div>
+                    <br><br>
+                    <div>
+                        <label for="showPassword"
+                               style="display: inline-block; margin-right: 0.7rem; pointer-events: none">Mostrar
+                            senha</label>
+                        <input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()"
+                               style="display: inline-block; transform: scale(1.6);">
+                    </div>
+
+                    <select id="action" name="action">
+                        <option value="register">Registrar</option>
+                        <option value="login">Login</option>
+                    </select><br><br>
+                    <button type="submit">Enviar</button>
+                </form>
+                <a href="index.html"><button>Voltar a pagina inicial</button></a>
+
+            </div>
+        </section>
+        <div class="texto-e-imagem">
+            <div class="github" style="position: relative; top: 25%">
+                <h2 class="github_sub">Acesse este repositório:</h2>
+                <a class="github_link" href="https://github.com/HenriqueStrada/CalculadoraPrestativaSpringBoot">
+                    <img src="/image/github.png" height="32" width="33" alt="gitHub Icon"/>GitHub</a>
+            </div>
+        </div>
+    </section>
+    <img class="imagem texto-e-imagem" src="/image/login.png" height="480" width="480" alt="eu sabo image"/>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+    </script>
+    <script src="/dalejs.js"></script>
+</main>
+<footer class="rodaPe">
+    <p>Desenvolvido por Henrique Strada e Gustavo Heimburg</p>
+</footer>
+</body>
+</html>
