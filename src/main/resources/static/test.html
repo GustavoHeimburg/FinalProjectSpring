@@ -2,11 +2,61 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro e Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
 <h1>Registro</h1>
-<form id="registerForm">
+<form id="registerForm" action="/register" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br>
     <label for="password">Password:</label>
@@ -15,7 +65,7 @@
 </form>
 
 <h1>Login</h1>
-<form id="loginForm">
+<form id="loginForm" action="/login" method="post">
     <label for="loginUsername">Username:</label>
     <input type="text" id="loginUsername" name="loginUsername" required><br>
     <label for="loginPassword">Password:</label>
@@ -24,17 +74,14 @@
 </form>
 
 <script>
-    // Dados de usuário registrados
     var users = [];
 
     document.getElementById("registerForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evita que o formulário seja enviado
+        event.preventDefault();
 
-        // Obtém os valores digitados pelo usuário
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
-        // Verifica se o usuário já está registrado
         var userExists = users.some(function(user) {
             return user.username === username;
         });
@@ -42,33 +89,27 @@
         if (userExists) {
             alert("Usuário já registrado. Por favor, faça login.");
         } else {
-            // Adiciona o novo usuário à lista de usuários registrados
             users.push({ username: username, password: password });
             alert("Registro bem-sucedido! Faça login com suas credenciais.");
-            // Limpa os campos de entrada de texto
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
         }
     });
 
     document.getElementById("loginForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evita que o formulário seja enviado
+        event.preventDefault();
 
-        // Obtém os valores digitados pelo usuário
         var loginUsername = document.getElementById("loginUsername").value;
         var loginPassword = document.getElementById("loginPassword").value;
 
-        // Verifica se as credenciais de login são válidas
         var user = users.find(function(user) {
             return user.username === loginUsername && user.password === loginPassword;
         });
 
         if (user) {
             alert("Login bem-sucedido! Bem-vindo, " + user.username + "!");
-            // Redireciona para a página de sucesso ou realiza outras ações necessárias
         } else {
             alert("Credenciais inválidas. Tente novamente.");
-            // Limpa os campos de entrada de texto
             document.getElementById("loginUsername").value = "";
             document.getElementById("loginPassword").value = "";
         }
