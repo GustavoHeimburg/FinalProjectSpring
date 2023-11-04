@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registro e Login</title>
+</head>
+<body>
+<h1>Registro</h1>
+<form id="registerForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+    <button type="submit">Registrar</button>
+</form>
+
+<h1>Login</h1>
+<form id="loginForm">
+    <label for="loginUsername">Username:</label>
+    <input type="text" id="loginUsername" name="loginUsername" required><br>
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" name="loginPassword" required><br>
+    <button type="submit">Login</button>
+</form>
+
+<script>
+    // Dados de usuário registrados
+    var users = [];
+
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita que o formulário seja enviado
+
+        // Obtém os valores digitados pelo usuário
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Verifica se o usuário já está registrado
+        var userExists = users.some(function(user) {
+            return user.username === username;
+        });
+
+        if (userExists) {
+            alert("Usuário já registrado. Por favor, faça login.");
+        } else {
+            // Adiciona o novo usuário à lista de usuários registrados
+            users.push({ username: username, password: password });
+            alert("Registro bem-sucedido! Faça login com suas credenciais.");
+            // Limpa os campos de entrada de texto
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita que o formulário seja enviado
+
+        // Obtém os valores digitados pelo usuário
+        var loginUsername = document.getElementById("loginUsername").value;
+        var loginPassword = document.getElementById("loginPassword").value;
+
+        // Verifica se as credenciais de login são válidas
+        var user = users.find(function(user) {
+            return user.username === loginUsername && user.password === loginPassword;
+        });
+
+        if (user) {
+            alert("Login bem-sucedido! Bem-vindo, " + user.username + "!");
+            // Redireciona para a página de sucesso ou realiza outras ações necessárias
+        } else {
+            alert("Credenciais inválidas. Tente novamente.");
+            // Limpa os campos de entrada de texto
+            document.getElementById("loginUsername").value = "";
+            document.getElementById("loginPassword").value = "";
+        }
+    });
+</script>
+</body>
+</html>
