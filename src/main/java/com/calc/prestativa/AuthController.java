@@ -15,7 +15,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@RequestParam String username, @RequestParam String password) {
-        return "redirect:/";
+        return "redirect:/register";
     }
 
     @PostMapping("/login")
